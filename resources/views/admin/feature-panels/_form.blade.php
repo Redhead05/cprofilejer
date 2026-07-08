@@ -1,0 +1,131 @@
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card bg-white border-0 rounded-3 h-100">
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <label for="headline" class="form-label fw-semibold">Headline</label>
+                    <input
+                        type="text"
+                        id="headline"
+                        name="headline"
+                        class="form-control @error('headline') is-invalid @enderror"
+                        value="{{ old('headline', $featurePanel->headline) }}"
+                        placeholder="Contoh: Track The Right Metrics With Zero Setup"
+                        required
+                    >
+                    @error('headline')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-semibold">Deskripsi</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        class="form-control @error('description') is-invalid @enderror"
+                        placeholder="Deskripsi panel feature"
+                        required
+                    >{{ old('description', $featurePanel->description) }}</textarea>
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-0">
+                    <label for="image" class="form-label fw-semibold">Gambar</label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+                        class="form-control @error('image') is-invalid @enderror"
+                    >
+                    @error('image')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                    <small class="text-secondary d-block mt-2">Upload gambar maksimal 2MB. Pastikan <code>php artisan storage:link</code> sudah dijalankan di Lerd.</small>
+
+                    @if ($featurePanel->image_url)
+                        <div class="mt-3">
+                            <img src="{{ $featurePanel->image_url }}" alt="Preview feature" class="img-fluid rounded-3 w-100" style="max-height: 220px; object-fit: cover;">
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card bg-white border-0 rounded-3 mb-4">
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <label for="eyebrow" class="form-label fw-semibold">Eyebrow</label>
+                    <input
+                        type="text"
+                        id="eyebrow"
+                        name="eyebrow"
+                        class="form-control @error('eyebrow') is-invalid @enderror"
+                        value="{{ old('eyebrow', $featurePanel->eyebrow) }}"
+                        placeholder="Track"
+                        required
+                    >
+                    @error('eyebrow')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="big_label" class="form-label fw-semibold">Big Label</label>
+                    <input
+                        type="text"
+                        id="big_label"
+                        name="big_label"
+                        class="form-control @error('big_label') is-invalid @enderror"
+                        value="{{ old('big_label', $featurePanel->big_label) }}"
+                        placeholder="Track"
+                        required
+                    >
+                    @error('big_label')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="sort_order" class="form-label fw-semibold">Urutan Tampil</label>
+                    <input
+                        type="number"
+                        min="0"
+                        id="sort_order"
+                        name="sort_order"
+                        class="form-control @error('sort_order') is-invalid @enderror"
+                        value="{{ old('sort_order', $featurePanel->sort_order ?? 0) }}"
+                    >
+                    @error('sort_order')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-check form-switch mb-0">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        id="is_active"
+                        name="is_active"
+                        value="1"
+                        {{ old('is_active', $featurePanel->is_active ?? true) ? 'checked' : '' }}
+                    >
+                    <label class="form-check-label fw-semibold" for="is_active">Tampilkan di landing page</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-wrap gap-2 mt-4">
+    <button type="submit" class="btn btn-primary px-4">{{ $submitLabel }}</button>
+    <a href="{{ route('admin.feature-panels.index') }}" class="btn btn-outline-secondary px-4">Batal</a>
+</div>
+
