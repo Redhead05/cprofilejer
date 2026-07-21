@@ -353,7 +353,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
                 @forelse ($teamMembers as $teamMember)
-                    <div class="rounded-[18px] bg-white border border-slate-100 shadow-sm p-[24px] text-center transition-all hover:-translate-y-[8px] hover:shadow-lg">
+                    <div class="rounded-[18px] bg-white shadow-sm p-[24px] text-center transition-all hover:-translate-y-[8px] hover:shadow-lg">
                         @if ($teamMember->photo_url)
                             <img alt="{{ $teamMember->name }}" class="mx-auto rounded-[16px] w-full h-56 object-cover object-center mb-4" src="{{ $teamMember->photo_url }}">
                         @else
@@ -367,21 +367,21 @@
                             <p class="text-[#3368FC] uppercase tracking-[1.8px] text-xs font-bold mb-3">{{ $teamMember->position }}</p>
                             <p class="mb-5 text-gray-500 leading-[1.8]">{{ $teamMember->bio }}</p>
 
-                            <div class="inline-flex items-center gap-3">
+                            <div class="inline-flex gap-[10px] text-[#3368FC] text-lg">
                                 @if ($teamMember->facebook_url)
-                                    <a href="{{ $teamMember->facebook_url }}" target="_blank" rel="noreferrer noopener" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-gray-500 transition-all hover:border-[#3368FC] hover:text-[#3368FC]">
+                                    <a href="{{ $teamMember->facebook_url }}" target="_blank" rel="noreferrer noopener" class="">
                                         <i class="ri-facebook-fill"></i>
                                     </a>
                                 @endif
 
                                 @if ($teamMember->twitter_url)
-                                    <a href="{{ $teamMember->twitter_url }}" target="_blank" rel="noreferrer noopener" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-gray-500 transition-all hover:border-[#3368FC] hover:text-[#3368FC]">
+                                    <a href="{{ $teamMember->twitter_url }}" target="_blank" rel="noreferrer noopener" class="">
                                         <i class="ri-twitter-x-fill"></i>
                                     </a>
                                 @endif
 
                                 @if ($teamMember->whatsapp_url)
-                                    <a href="{{ $teamMember->whatsapp_url }}" target="_blank" rel="noreferrer noopener" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-gray-500 transition-all hover:border-[#25D366] hover:text-[#25D366]">
+                                    <a href="{{ $teamMember->whatsapp_url }}" target="_blank" rel="noreferrer noopener" class="">
                                         <i class="ri-whatsapp-line"></i>
                                     </a>
                                 @endif
@@ -397,6 +397,7 @@
         </div>
     </div>
 
+
     <!-- FAQ -->
     <div id="contact" class="pb-[60px] md:pb-[80px] lg:pb-[100px] relative z-[1]">
         <div class="container sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1308px] mx-auto px-[12px]">
@@ -404,38 +405,68 @@
                 <div class="md:max-w-[496px]">
                     <span class="inline-block rounded-[4px] uppercase font-bold tracking-[1.8px] text-[11px] md:text-xs bg-primary-500 text-white mb-[10px] md:mb-[12px] lg:mb-[15px] py-[3px] px-[10px]">FAQ</span>
                     <h2 class="!mb-[20px] md:!mb-[25px] lg:!mb-[35px] xl:!mb-[40px] !text-[26px] md:!text-4xl lg:!text-[46px] -tracking-[1px] md:-tracking-[1.5px] lg:-tracking-[2.3px]">Have Questions In Mind? Contact With Us Anytime, From Anywhere</h2>
-                    <a href="mailto:hello@RFJ Law Firm.local" class="inline-block text-center rounded-[4px] bg-[#3368FC] border border-[#3368FC] text-white uppercase text-xs font-bold tracking-[1.8px] py-[14px] md:py-[15px] lg:py-[16px] px-[20px] md:px-[23px] transition-all hover:bg-primary-500">CONTACT US</a>
+                    <a href="mailto:hello@rfjlawfirm.local" class="inline-block text-center rounded-[4px] bg-[#3368FC] border border-[#3368FC] text-white uppercase text-xs font-bold tracking-[1.8px] py-[14px] md:py-[15px] lg:py-[16px] px-[20px] md:px-[23px] transition-all hover:bg-primary-500">CONTACT US</a>
                 </div>
 
-                <div class="accordion" id="RFJ Law FirmAccordion">
+                <div class="accordion" id="rfjAccordion">
                     @forelse ($faqItems as $index => $faqItem)
                         <div class="accordion-item bg-white rounded-[10px] dark:bg-[#0a0e19] mb-[15px] last:mb-0">
-                            <button class="accordion-button {{ $index === 0 ? 'open' : '' }} text-base md:text-md font-normal px-[15px] md:px-[20px] py-[15px] md:py-[18px] flex items-center justify-between w-full ltr:text-left rtl:text-right relative text-black dark:text-white -tracking-[0.16px]" type="button">
+                            <button class="accordion-button {{ $index ===0 ? 'open' : '' }} text-base md:text-md font-normal px-[15px] md:px-[20px] py-[15px] md:py-[18px] flex items-center justify-between w-full ltr:text-left rtl:text-right relative text-black dark:text-white -tracking-[0.16px]"
+                                    type="button"
+                                    aria-expanded="{{ $index ===0 ? 'true' : 'false' }}"
+                            >
                                 {{ $loop->iteration }}. {{ $faqItem->question }}
                                 <span class="block leading-none text-primary-500 text-[22px]"><i class="ri-arrow-down-s-line"></i></span>
                             </button>
-                            <div class="accordion-collapse -mt-[3px] px-[15px] md:px-[20px] pb-[15px] md:pb-[18px] {{ $index === 0 ? 'block' : 'hidden' }}">
+
+                            <div class="accordion-collapse -mt-[3px] px-[15px] md:px-[20px] pb-[15px] md:pb-[18px] {{ $index ===0 ? 'block' : 'hidden' }}">
                                 <p>{{ $faqItem->answer }}</p>
                             </div>
                         </div>
-                    @empty
-                        <div class="accordion-item bg-white rounded-[10px] dark:bg-[#0a0e19] mb-[15px] last:mb-0">
-                            <div class="px-[15px] md:px-[20px] py-[18px] text-black dark:text-white -tracking-[0.16px]">
-                                FAQ akan segera tersedia.
-                            </div>
+                    @empty <div class="accordion-item bg-white rounded-[10px] dark:bg-[#0a0e19] mb-[15px] last:mb-0">
+                        <div class="px-[15px] md:px-[20px] py-[18px] text-black dark:text-white -tracking-[0.16px]">
+                            FAQ akan segera tersedia.
                         </div>
-                    @endforelse
-                </div>
+                    </div>
+                    @endforelse </div>
             </div>
         </div>
 
-        <div class="absolute -z-[1] ltr:left-[30%] rtl:right-[30%] ltr:xl:left-[35%] rtl:xl:right-[35%] bottom-[100px] hidden lg:block"><img src="{{ $assets }}/images/analytics/shape.png" alt="shape"></div>
+        <div class="absolute -z-[1] ltr:left-[30%] rtl:right-[30%] ltr:xl:left-[35%] rtl:xl:right-[35%] bottom-[100px] hidden lg:block">
+            <img src="{{ $assets }}/images/analytics/shape.png" alt="shape">
+        </div>
         <div class="absolute left-0 right-0 ltr:md:left-[20px] rtl:md:right-[20px] ltr:lg:left-[80px] rtl:lg:right-[80px] ltr:md:right-auto rtl:md:left-auto bottom-0 rounded-[420px] h-[347px] w-[290px] md:w-[550px] lg:w-[916px] mx-auto bg-[#3368fc]/40 blur-[232px] -z-[2]"></div>
         <div class="absolute left-0 right-0 ltr:md:right-[20px] rtl:md:left-[20px] ltr:lg:right-[80px] rtl:lg:left-[80px] ltr:md:left-auto rtl:md:right-auto bottom-[347px] md:bottom-0 rounded-[420px] h-[347px] w-[290px] md:w-[550px] lg:w-[862px] mx-auto bg-[#93cce6]/70 blur-[232px] -z-[2]"></div>
     </div>
+<style>
+    .float {
+    position: fixed;
+    width:60px;
+    height:60px;
+    bottom:90px;
+    right:40px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius:50px;
+    text-align: center;
+    font-size:30px;
+    box-shadow:2px2px3px #999;
+    z-index:100;
+    }
+    </style>
+
+    <a href="https://wa.me/919876543210"
+       class="float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Connect with me on WhatsApp"
+    >
+        <img class="my-float" src="{{ asset('assets/images/wa-logo.png') }}" alt="WhatsApp">
+    </a>
 @endsection
 
 @push('scripts')
+
     @if ($carousels->count() > 1)
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -464,5 +495,37 @@
             });
         </script>
     @endif
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const root = document.getElementById('rfjAccordion');
+                if (!root) return;
+
+                root.querySelectorAll('.accordion-button').forEach((button) => {
+                    button.addEventListener('click', function () {
+                        const item = button.closest('.accordion-item');
+                        const panel = item ? item.querySelector('.accordion-collapse') : null;
+                        if (!panel) return;
+
+                        const isOpen = !panel.classList.contains('hidden');
+
+                        root.querySelectorAll('.accordion-collapse').forEach((el) => {
+                            el.classList.add('hidden');
+                            el.classList.remove('block');
+                        });
+                        root.querySelectorAll('.accordion-button').forEach((btn) => {
+                            btn.classList.remove('open');
+                            btn.setAttribute('aria-expanded', 'false');
+                        });
+
+                        if (!isOpen) {
+                            panel.classList.remove('hidden');
+                            panel.classList.add('block');
+                            button.classList.add('open');
+                            button.setAttribute('aria-expanded', 'true');
+                        }
+                    });
+                });
+            });
+        </script>
 @endpush
 
