@@ -54,7 +54,7 @@
 
 @endphp
 
-@section('title', 'RFJ Law Firm - Tailwind CSS Admin Dashboard Template')
+@section('title', 'RFJ Law Firm')
 @section('body-class', 'bg-white dark:bg-black text-[#1b1b18] overflow-x-hidden antialiased')
 
 @section('content')

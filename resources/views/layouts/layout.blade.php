@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/remixicon.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        <link rel="icon" type="image/png" href="{{ asset('assets/favicon.ico') }}">
+        <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
